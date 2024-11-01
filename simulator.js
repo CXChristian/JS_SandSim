@@ -1,47 +1,39 @@
+/*
+Program to simulate sand falling through a grid of cells.
+Used to be run on a div called "game" in the HTML file.
+*/
+let BOARD_ROWS = 20;
+let BOARD_COLUMNS = 8;
+let CELL_SIZE = 20;
+let CELL_BORDER_SIZE = 1;
+
 function run() {
-    let boardSize = 0;
-    let userInput = document.getElementById("size").value
-
-    if (isNaN(userInput)){ // Not a number
-        alert("Invalid input. Please enter a number.");
-    }
-
-    if (userInput > 0 && userInput <= 100) { // Valid input
-        boardSize = userInput;
-
-        let html = document.getElementById("startup");
-        html.style.display = "none";
-
-        buildGame(boardSize);
-
-    } else { // Not between 1 and 100
-        alert("Invalid input. Please enter a number between 1 and 100.");
-    }
-}
-
-function buildGame(N) {
-    console.log("Building game with size: " + N);
     let html = document.getElementById("game");
+
     let board = [];
-    let cellSize = "20px";
 
     // Create a game board
-    for (var i = 0; i < N; i++) {
+    for (var i = 0; i < BOARD_ROWS; i++) {
         board[i] = [];
-        let row = document.createElement("div");
-        row.style.display = "compact";
-        row.style.padding = "0px";
-        row.style.margin = "0px";
-        for (var j = 0; j < N; j++) {
-            board[i][j] = 0;
 
+        let row = document.createElement("div");
+        row.style.display = "flex";
+        row.style.padding = "0px";
+        row.style.width = `${CELL_SIZE * BOARD_COLUMNS + (CELL_BORDER_SIZE * BOARD_COLUMNS)}px`;
+        row.style.margin = "0px";
+        row.style.backgroundColor = "blue";
+
+        for (var j = 0; j < BOARD_COLUMNS; j++) {
+            board[i][j] = 0;
+        
             let cell = document.createElement("div");
-            cell.style.border = "1px solid black";
-            cell.style.width = cellSize;
-            cell.style.height = cellSize;
+            cell.style.border = `${CELL_BORDER_SIZE}px solid black`;
+            cell.style.width = `${CELL_SIZE}px`;
+            cell.style.height = `${CELL_SIZE}px`;
             cell.style.display = "inline-block";
             cell.style.padding = "0px";
             cell.style.margin = "0px";
+            cell.style.backgroundColor = "red";
 
             // Append cell to the game div
             row.appendChild(cell);
