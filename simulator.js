@@ -6,7 +6,7 @@ const BOARD_ROWS = 20;
 const BOARD_COLUMNS = 8;
 const CELL_SIZE = 20;
 const CELL_BORDER_SIZE = 1;
-const FRAME_DELAY = 10000;
+const FRAME_DELAY = 30;
 
 function run() {
     const html = document.getElementById("game");
@@ -38,7 +38,6 @@ function run() {
                 cell.style.backgroundColor = "black";
             }
 
-            // Append cell to the game div
             row.appendChild(cell);
         }
         html.appendChild(row);
@@ -49,8 +48,8 @@ function run() {
 }
 
 function renderFrame(board) {
-    for (var i = 0; i < BOARD_ROWS; i++) {
-        for (var j = 0; j < BOARD_COLUMNS; j++) {
+    for (var i = BOARD_ROWS - 1; i>= 0; i--) {
+        for (var j = BOARD_COLUMNS - 1; j>=0; j--) {
             if (board[i][j] == 1) {
                 if (i + 1 < BOARD_ROWS && board[i + 1][j] == 0) {
                     console.log(`Moving cell ${i}-${j} to ${i + 1}-${j}`);
